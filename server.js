@@ -1,6 +1,6 @@
 const dgram = require('dgram');
 const readLine = require('readline');
-const env = require('env');
+const env = require('./env');
 
 const server = dgram.createSocket('udp4')
 
