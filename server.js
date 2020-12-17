@@ -1,13 +1,16 @@
 const dgram = require('dgram');
 const readLine = require('readline');
+const env = require('env');
 
 const server = dgram.createSocket('udp4')
 
 server.on('message', (sms, remoteInfo) => {
-    console.log(`Server got sms from ${remoteInfo.address + remoteInfo.port}:\n${sms}`);
-    server.send(readLine(), 9898, '127.0.0.1', (err) => {
+    console.log(`--- sms from ${remoteInfo.address + remoteInfo.port}:\n${sms}`);
+    server.send(readLine(), env.client.port, env.host, (err) => {
         console.log(err.message);
     });
 });
+
+server.bind(env.server.port);
 
 
